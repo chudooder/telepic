@@ -12,3 +12,7 @@ var pad = new Sketchpad(el, {
 $(document).ready(function() {
 
 });
+
+$('#clear-btn').click(function() {
+    pad.clear();
+});

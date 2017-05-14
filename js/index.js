@@ -402,4 +402,8 @@ $(document).ready(function() {
 
 });
 
+$('#clear-btn').click(function() {
+    pad.clear();
+});
+
 },{"responsive-sketchpad":1}]},{},[2]);
