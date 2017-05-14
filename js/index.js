@@ -399,7 +399,7 @@ var pad = new Sketchpad(el, {
 });
 
 $(document).ready(function() {
-    pad.resize(window.innerWidth);
+
 });
 
 },{"responsive-sketchpad":1}]},{},[2]);
