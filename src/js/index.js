@@ -13,6 +13,15 @@ $(document).ready(function() {
 
 });
 
+// Fixes buttons getting stuck down on mobile
+$(".btn").on("touchstart", function() {
+    $(this).removeClass("mobileHoverFix");
+});
+
+$(".btn").on("touchend", function() {
+    $(this).addClass("mobileHoverFix");
+});
+
 $('#clear-btn').click(function() {
     pad.clear();
 });

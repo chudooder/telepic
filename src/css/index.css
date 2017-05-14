@@ -19,3 +19,8 @@
 .action-btn {
     padding: 20px 0px !important;
 }
+
+.mobileHoverFix:hover,
+.mobileHoverFix.hover {
+    background-position: 0 0px;
+}
