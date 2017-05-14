@@ -1,12 +1,13 @@
 .drawpanel {
-    margin: 10px;
     border-width: 1px;
     border-style: solid;
     border-color: black;
-    box-shadow: 0px 3px 10px 3px #aaa;
 }
 
 .textpanel {
-    margin: 10px;
     text-align: center;
+}
+
+.row {
+    margin: 10px;
 }
