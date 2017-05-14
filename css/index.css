@@ -11,3 +11,11 @@
 .row {
     margin: 10px;
 }
+
+.color-btn {
+    padding: 10px 0px !important;
+}
+
+.action-btn {
+    padding: 20px 0px !important;
+}

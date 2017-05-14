@@ -16,3 +16,19 @@ $(document).ready(function() {
 $('#clear-btn').click(function() {
     pad.clear();
 });
+
+$('#c-black-btn').click(function() {
+    pad.setLineColor('#000000');
+});
+
+$('#c-red-btn').click(function() {
+    pad.setLineColor('#FF0000');
+});
+
+$('#c-green-btn').click(function() {
+    pad.setLineColor('#00FF00');
+});
+
+$('#c-blue-btn').click(function() {
+    pad.setLineColor('#0000FF');
+});
