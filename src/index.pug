@@ -2,10 +2,10 @@ doctype html
 html(lang="en")
   head
     title Telephone Pictionary
-    link(type="text/css" href="css/index.css")
+    link(rel="stylesheet" type="text/css" href="css/index.css")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js")
     meta(charset="utf-8")
   body
-    canvas(id='canvas' width='500' height='500')
+    div(class='drawpanel' id='sketchpad')
     script(src='js/index.js')
 
