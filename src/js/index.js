@@ -8,22 +8,31 @@ var curPad;
 var curPadRow;
 var curButtonRow;
 
+var curRound;
+var numRounds;
+
 
 $(window).on("load", function() {
-    // Initialize sketchpad
+    // Initialize game
+    numRounds = 5;
+    curRound = 0;
+
+    // Initialize sketchpad size variables
     var el = $('#game-area')[0];
     padWidth = $('#game-area').width();
     padHeight = $(window).height() * 0.7;
+
+    // First text area
     appendTextArea();
+
 });
 
 function appendSketchpad() {
     var gameArea = $('#game-area');
-    var row = $('<div class="row"></div>');
+    var row = $('<div class="row pad-row"></div>');
     var col1 = $('<div class="two-thirds column"></div>');
     var panel = $('<div class="drawpanel" id="sketchpad"></div>');
 
-    panel.appendTo(col1);
 
     var buttons = $('<div class="one-third column">\
           <div class="row">\
@@ -57,8 +66,7 @@ function appendSketchpad() {
         height: padHeight
     });
 
-    curPadCanvas = panel.find('canvas');
-
+    panel.appendTo(col1);
     col1.appendTo(row);
     buttons.appendTo(row);
 
@@ -72,9 +80,15 @@ function appendSketchpad() {
 
 function appendTextArea() {
     var gameArea = $('#game-area');
-    var row = $('<div class="row"></div>');
+    var row = $('<div class="row text-row"></div>');
     var textArea = $("<div class='two-thirds column textpanel'></div>");
     var text = $("<input type='text' class='form-control input-lg text-center panel-title'>");
+
+    if(curRound == 0) {
+        text.prop('placeholder', 'What are we drawing this time?');
+    } else {
+        text.prop('placeholder', 'Describe the above drawing.');
+    }
 
     curTextRow = row;
     curText = text;
@@ -87,7 +101,17 @@ function appendTextArea() {
 };
 
 function inputToTitle() {
-    return $('<div><h2>' + curText.val() + '</h2></div>');
+    return $('<div class="row text-row"><h2>' + curText.val() + '</h2></div>');
+};
+
+function nextRound() {
+    curRound += 1;
+    if(curRound == numRounds) {
+        $('.text-row').show();
+        $('.pad-row').show();
+        return false;
+    }
+    return true;
 }
 
 function registerButtonListeners() {
@@ -101,11 +125,11 @@ function registerButtonListeners() {
 
     $("#submit-btn").click(function() {
         curTextRow.hide();
-
         curPad.disable();
-
         curButtonRow.remove();
-        appendTextArea();
+
+        if(nextRound())
+            appendTextArea();
     });
 
     $('#clear-btn').click(function() {
@@ -135,9 +159,12 @@ function registerTextListener() {
             var repl = inputToTitle();
             curTextRow.replaceWith(repl);
             curTextRow = repl;
+
             if(curPadRow != null)
                 curPadRow.hide();
-            appendSketchpad();
+
+            if(nextRound())
+                appendSketchpad();
         }
     });
 }
