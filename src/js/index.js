@@ -1,8 +1,12 @@
-var Sketchpad = require('responsive-sketchpad');
+var Sketchpad = require('./responsive-sketchpad.js');
 
 var padWidth;
 var padHeight;
+var curText;
+var curTextRow;
 var curPad;
+var curPadRow;
+var curButtonRow;
 
 
 $(window).on("load", function() {
@@ -10,9 +14,7 @@ $(window).on("load", function() {
     var el = $('#game-area')[0];
     padWidth = $('#game-area').width();
     padHeight = $(window).height() * 0.7;
-    console.log(padWidth + " " + padHeight);
     appendTextArea();
-    appendSketchpad();
 });
 
 function appendSketchpad() {
@@ -55,23 +57,39 @@ function appendSketchpad() {
         height: padHeight
     });
 
+    curPadCanvas = panel.find('canvas');
+
     col1.appendTo(row);
     buttons.appendTo(row);
 
     row.appendTo(gameArea);
+
+    curPadRow = row;
+    curButtonRow = buttons;
 
     registerButtonListeners();
 };
 
 function appendTextArea() {
     var gameArea = $('#game-area');
-    gameArea.append("<div class='row'>\
-        <div class='two-thids column textpanel'>\
-        <input type='text' class='form-control input-lg text-center'>\
-        </div></div>");
+    var row = $('<div class="row"></div>');
+    var textArea = $("<div class='two-thirds column textpanel'></div>");
+    var text = $("<input type='text' class='form-control input-lg text-center panel-title'>");
+
+    curTextRow = row;
+    curText = text;
+
+    text.appendTo(textArea);
+    textArea.appendTo(row);
+    row.appendTo(gameArea);
+
+    registerTextListener();
 };
 
-// Fixes buttons getting stuck down on mobile
+function inputToTitle() {
+    return $('<div><h2>' + curText.val() + '</h2></div>');
+}
+
 function registerButtonListeners() {
     $(".btn").on("touchstart", function() {
         $(this).removeClass("mobileHoverFix");
@@ -82,6 +100,11 @@ function registerButtonListeners() {
     });
 
     $("#submit-btn").click(function() {
+        curTextRow.hide();
+
+        curPad.disable();
+
+        curButtonRow.remove();
         appendTextArea();
     });
 
@@ -103,5 +126,18 @@ function registerButtonListeners() {
 
     $('#c-blue-btn').click(function() {
         curPad.setLineColor('#0000FF');
+    });
+}
+
+function registerTextListener() {
+    $(".panel-title").keypress(function(e) {
+        if(e.which == 13) {
+            var repl = inputToTitle();
+            curTextRow.replaceWith(repl);
+            curTextRow = repl;
+            if(curPadRow != null)
+                curPadRow.hide();
+            appendSketchpad();
+        }
     });
 }
