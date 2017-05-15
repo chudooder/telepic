@@ -1,3 +1,7 @@
+html, body {
+    height: 100%;
+}
+
 .drawpanel {
     border-width: 1px;
     border-style: solid;
@@ -13,9 +17,19 @@
 }
 
 .color-btn {
-    padding: 10px 0px !important;
+    padding: 20px 0px !important;
 }
 
 .action-btn {
     padding: 20px 0px !important;
+}
+
+.mobileHoverFix:hover,
+.mobileHoverFix.hover {
+    background-position: 0 0px;
+}
+
+.full {
+    min-height: 100%;
+    height: 100%;
 }

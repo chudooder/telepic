@@ -7,33 +7,7 @@ html(lang="en")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js")
     meta(charset="utf-8")
   body
-    div(class='container')
-      div(class='row')
-        div(class='two-thirds column textpanel')
-          input(type="text" class="form-control input-lg text-center")
-      div(class='row')
-        div(class='two-thirds column')
-          div(class='drawpanel' id='sketchpad')
-        div(class='one-third column')
-          div(class='row')
-            div(class='col-sm-1')
-              div(id='c-black-btn' class='btn btn-lg color-btn')
-                | Blk
-            div(class='col-sm-1')
-              div(id='c-red-btn' class='btn btn-lg color-btn')
-                | Red
-            div(class='col-sm-1')
-              div(id='c-green-btn' class='btn btn-lg color-btn')
-                | Grn
-            div(class='col-sm-1')
-              div(id='c-blue-btn' class='btn btn-lg color-btn')
-                | Blu
-            div(class='col-sm-4')
-              div(id='clear-btn' class='btn btn-lg btn-block btn-danger action-btn')
-                | Clear
-            div(class='col-sm-4')
-              div(id='submit-btn' class='btn btn-lg btn-block btn-success action-btn')
-                | Submit
+    div(id='game-area' class='container full')
 
     script(src='js/index.js')
 
