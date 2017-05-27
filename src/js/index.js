@@ -13,19 +13,44 @@ var numRounds;
 
 
 $(window).on("load", function() {
-    // Initialize game
-    numRounds = 5;
-    curRound = 0;
-
     // Initialize sketchpad size variables
     var el = $('#game-area')[0];
     padWidth = $('#game-area').width();
     padHeight = $(window).height() * 0.7;
-
-    // First text area
-    appendTextArea();
-
+    
+    // Initialize game
+    promptNumRounds();
 });
+
+function promptNumRounds() {
+    var gameArea = $('#game-area');
+    var row = $('<div class="row text-row"></div>');
+    var textArea = $("<div class='two-thirds column textpanel'></div>");
+    var text = $(`<input type="number" min="2" max="50" step="1" required 
+        class='form-control input-lg text-center panel-title'>`);
+    text.prop('placeholder', 'How many players are there?');
+
+    text.appendTo(textArea);
+    textArea.appendTo(row);
+    row.appendTo(gameArea);
+
+    // Register listener
+    $(".panel-title").keypress(function(e) {
+        if(e.which == 13) {
+            // Set number of rounds
+            numRounds = text.val();
+            curRound = 0;
+
+            // Remove prompt DOM objects
+            textArea.remove();
+            row.remove(); 
+            text.remove();
+
+            // Begin the game with text input
+            appendTextArea();
+        }
+    });
+}
 
 function appendSketchpad() {
     var gameArea = $('#game-area');
